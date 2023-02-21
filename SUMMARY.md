@@ -6,7 +6,7 @@
 
 ## 기초지식 <a href="#ds_basic_knowledge" id="ds_basic_knowledge"></a>
 
-* [😆 기초지식.확률론](ds\_basic\_knowledge/untitled.md)
+* [😆 기초지식.확률론](untitled.md)
 
 ## CV & NLP <a href="#cv_nlp" id="cv_nlp"></a>
 
