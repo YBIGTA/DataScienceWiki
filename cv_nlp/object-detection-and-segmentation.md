@@ -1,8 +1,4 @@
----
-description: 술 먹으면 내가 못하는 것
----
-
-# 😇 CV.Object Detection & Segmentation
+# Object Detection & Segmentation
 
 ## **서론**
 
