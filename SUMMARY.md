@@ -11,3 +11,5 @@
 ## CV & NLP <a href="#cv_nlp" id="cv_nlp"></a>
 
 * [Object Detection & Segmentation](cv\_nlp/object-detection-and-segmentation.md)
+* [NLP](cv\_nlp/nlp/README.md)
+  * [01. Recurrent Models](cv\_nlp/nlp/01.-recurrent-models.md)
