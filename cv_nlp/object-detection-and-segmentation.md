@@ -66,7 +66,9 @@ Fast R-CNN에서 가장 핵심이 되는 아이디어입니다. R-CNN에서는 C
 
 Fast R-CNN은 End to end로 한 번에 전체 네트워크를 학습하기 위해 Multi-task loss를 아래 식과 같이 사용하였습니다. 이로써 Clasification과 Bounding Box Regression에 대해 하나의 Loss로 동시에 학습을 진행할 수 있었습니다. 이외에도 Fast R-CNN은 Truncated SVM을 사용하여 Fully Connected Layer의 파라미터 수를 줄이고 동작 속도를 30%이상 향상할 수 있었습니다.
 
-$$L(p,u,t^u,v)=L_{cls}(p,u)+\lambda[u\geq1]L_{loc}(t^u,v)$$
+$$
+L(p,u,t^u,v)=L_{cls}(p,u)+\lambda[u\geq1]L_{loc}(t^u,v)
+$$
 
 * $$p=(p_0, ...,p_k) : (k+1)개의\;class\;score$$
 * $$u: ground\;truth\;class\;score$$
@@ -109,7 +111,9 @@ YOLO는 이미지 분류에 사용되었던 GoogLeNet의 구조를 기반으로 
 
 훈련에 사용된 Loss function은 다음과 같습니다.&#x20;
 
-$$L =\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}[(x_i-\hat{x_i})^2+(y_i-\hat{y_i})^2]\\ +\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}[(\sqrt{w_i}-\sqrt{\hat{w_i}})^2+(\sqrt{h_i}-\sqrt{\hat{h_i}})^2]\\   +\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}(C_i-\hat{C_i})^2\\ +\lambda_{noobj}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{noobj}(C_i-\hat{C_i})^2\\ +\sum\limits_{i=0}^{S^2}\mathbb{1}_{ij}^{obj}\sum\limits_{c \in classes}^{}(p_i(c)-\hat{p_i}(c))^2$$
+$$
+L =\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}[(x_i-\hat{x_i})^2+(y_i-\hat{y_i})^2]\\ +\lambda_{coord}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}[(\sqrt{w_i}-\sqrt{\hat{w_i}})^2+(\sqrt{h_i}-\sqrt{\hat{h_i}})^2]\\   +\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{obj}(C_i-\hat{C_i})^2\\ +\lambda_{noobj}\sum\limits_{i=0}^{S^2}\sum\limits_{j=0}^{B}\mathbb{1}_{ij}^{noobj}(C_i-\hat{C_i})^2\\ +\sum\limits_{i=0}^{S^2}\mathbb{1}_{ij}^{obj}\sum\limits_{c \in classes}^{}(p_i(c)-\hat{p_i}(c))^2
+$$
 
 
 
