@@ -18,15 +18,13 @@ Image Segmentation은 아래 그림과 같이 이미지를 영역으로 구분 �
 
 R-CNN은 Region-based Convolutional Neural Network의 약자로 Object Detection을 수행하는 2-Stage detector 모델입니다. 모델의 동작은 크게 Object가 존재하는 영역을 찾는 Region Proposal, 찾은 영역의 특징들을 추출하는 Feature Extraction, 특징들로부터 물체를 분류하는 Classification과 물체의 위치를 찾는 Bounding box regression으로 이루어져 있습니다. 정리하면 아래 그림과 같이 모델이 동작한다고 할 수 있습니다.
 
-<figure><img src="../.gitbook/assets/그림 3 R-CNN 모델.png" alt=""><figcaption><p>그림 3. R-CNN 모델 구조(1)</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/그림 3 R-CNN 모델.png" alt=""><figcaption><p>그림 3. R-CNN 모델 구조</p></figcaption></figure>
 
 #### **Region Proposal**
 
-Region Proposal은 물체가 있을법한 영역을 제시하는 과정으로 Selective Search 알고리즘에 의해 이뤄집니다. Selective Search 알고리즘은 이미지를 작은 영역들로 많이 나누어 각 영역에서의 색상, 질감, 명암에 따른 값을 설정합니다. 이후 Iteration을 통해 이 값들의 차이에 따라 유사도가 높은 영역들은 합쳐지고 최종적으로 약 2,000개의 영역만을 남겨놓습니다. 이렇게 남겨진 영역들은 우리가 실제로 관심을 가져야 하는 영역이기에 Region of Interest (RoI)라고 부르게 됩니다.
+Region Proposal은 물체가 있을법한 영역을 제시하는 과정으로 Selective Search 알고리즘에 의해 이뤄집니다. Selective Search 알고리즘은 이미지를 작은 영역들로 많이 나누어 각 영역에서의 색상, 질감, 명암에 따른 값을 설정합니다. 이후 Iteration을 통해 이 값들의 차이에 따라 유사도가 높은 영역들은 합쳐지고 최종적으로 약 2,000개의 영역만을 남겨놓습니다. 이렇게 남겨진 영역들은 우리가 실제로 관심을 가져야 하는 영역이기에 Region of Interest (RoI)라고 부릅니다.
 
-![](<../.gitbook/assets/그림 4 Selective search.png>)
-
-그림 4. Selective search with some iterations&#x20;
+<figure><img src="../.gitbook/assets/그림 4 Selective search.png" alt=""><figcaption><p>그림 4. Selective search with some iterations</p></figcaption></figure>
 
 #### **Feature Extraction**
 
@@ -36,9 +34,7 @@ Region Proposal은 물체가 있을법한 영역을 제시하는 과정으로 Se
 
 추출된 Feature vector로부터 우리는 물체를 분류할 수 있습니다. 물체를 분류하는 방법들은 다양하게 존재하지만 R-CNN에서는 Support Vector Machine (SVM)을 사용하였습니다. 이로부터 RoI가 물체인지 아닌지, 그리고 물체라면 어떤 물체인지 분류할 수 있습니다. Classification의 과정을 정리하면 아래 그림과 같습니다.&#x20;
 
-![](<../.gitbook/assets/그림 5 R-CNN Classification.png>)
-
-그림 5. R-CNN 모델 구조(2)
+<figure><img src="../.gitbook/assets/그림 5 R-CNN Classification.png" alt=""><figcaption><p>그림 5. R-CNN 모델 구조(2)</p></figcaption></figure>
 
 #### **Bounding Box Regression**
 
@@ -54,9 +50,7 @@ R-CNN은 Object Detection문제에 CNN을 최초로 적용한 모델로 이전�
 
 Fast R-CNN은 모델 네트워크가 입력에서 출력까지 한 번에 학습하고 동작할 수 있도록 설계한 1-stage detector 모델입니다. 하나의 네트워크로 동작하기에 기존 R-CNN의 느린 동작 문제를 해결하였습니다. Fast R-CNN은 R-CNN과 달리 CNN을 통과시킨 뒤 Feature map으로부터 Selective Search 알고리즘을 활용하여 RoI를 추출합니다. 이후 RoI Pooling을 통해 RoI를 고정된 크기로 변환한 후 신경망을 통과하여 Softmax를 통해 물체를 분류하고 Bounding Box Regression을 통해 물체의 Bounding Box 위치를 조정합니다.
 
-![](<../.gitbook/assets/그림 6 Fast R-CNN 모델구조.png>)
-
-그림 6. Fast R-CNN 모델 구조(1)
+<figure><img src="../.gitbook/assets/그림 6 Fast R-CNN 모델구조.png" alt=""><figcaption><p>그림 6. Fast R-CNN 모델 구조(1)</p></figcaption></figure>
 
 #### **RoI Pooling**
 
@@ -66,9 +60,7 @@ Fast R-CNN에서 가장 핵심이 되는 아이디어입니다. R-CNN에서는 C
 
 다음으로 Fully Connected Layer에 입력하기 위해 출력값을동일한 크기의 vector로 변형하는 작업을 진행합니다. 아래 그림과 같이 Feature map에 검은색 hxw의 크기만큼 RoI가 투영되었다면 이를 세로 H칸, 가로 W칸의 영역으로 분리하기 위해 (h/H)x(w/W)의 크기만큼 Grid를 생성합니다. 마지막으로 각 칸에 대해 최곳값만 추출한다면 HxW 크기의 고정된 크기 벡터가 생성됩니다.
 
-![](<../.gitbook/assets/그림 7 RoI Pooling.png>)
-
-그림 7. RoI Pooling&#x20;
+<figure><img src="../.gitbook/assets/그림 7 RoI Pooling.png" alt=""><figcaption><p>그림 7. RoI Pooling</p></figcaption></figure>
 
 #### **Multi-task loss**
 
@@ -89,9 +81,7 @@ $$L(p,u,t^u,v)=L_{cls}(p,u)+\lambda[u\geq1]L_{loc}(t^u,v)$$
 
 정리하면 아래 그림과 같이 모델이 동작합니다. CNN으로 Feature map을 추출한 뒤 RoI pooling을 진행하고 Classification과 Bounding Box Regression을 한 번에 진행합니다. Fast R-CNN은 R-CNN보다 높은 정확도와 빠른 속도를 보이지만 여전히 Selective Search를 사용하여 RoI를 생성하기에 속도 저하가 발생합니다. 따라서 Selective Search 알고리즘을 CNN의 내부에서 GPU연산으로 진행하는 아이디어를 제시한 것이 Faster R-CNN입니다. 이는 Ybigta의 Data Science팀에서 더 자세하게 배우실 수 있습니다.
 
-![](<../.gitbook/assets/그림 8 Fast R CNN 구조.png>)
-
-그림 8. Fast R-CNN 모델 구조(2)
+<figure><img src="../.gitbook/assets/그림 8 Fast R CNN 구조.png" alt=""><figcaption><p>그림 8. Fast R-CNN 모델 구조(2)</p></figcaption></figure>
 
 
 
@@ -109,17 +99,13 @@ YOLO는 이미지 전체를 활용하여 물체를 검출하고 end to end로 �
 
 최종적으로 Cell에서 아래 그림과 같이 물체에 대한 Classification과 Bounding Box 예측을 함께 진행함으로써 한 번에 Object Detection이 이뤄질 수 있습니다.
 
-![](<../.gitbook/assets/그림 9 YOLO 설명.png>)
-
-그림 9. YOLO 모델 동작
+<figure><img src="../.gitbook/assets/그림 9 YOLO 설명.png" alt=""><figcaption><p>그림 9. YOLO 모델 동작</p></figcaption></figure>
 
 #### **Network Design**
 
 YOLO는 이미지 분류에 사용되었던 GoogLeNet의 구조를 기반으로 하며 두 개의 FC layer가 뒤에 추가되었습니다.&#x20;
 
-![](<../.gitbook/assets/그림 10 YOLO 구조.png>)
-
-그림 10. YOLO 모델 구조
+<figure><img src="../.gitbook/assets/그림 10 YOLO 구조.png" alt=""><figcaption><p>그림 10. YOLO 모델 구조</p></figcaption></figure>
 
 훈련에 사용된 Loss function은 다음과 같습니다.&#x20;
 
@@ -143,9 +129,7 @@ Semantic segmentation은 이미지의 픽셀을 하나하나 분류하는 방식
 
 FCN은 Fully Convolutional Networks의 약자로 아래와 같이 모든 Layer가 convolution layer로 이뤄져 있습니다. 크게 Encoder와 Decoder로 네트워크 구조가 나뉘며 Encoder에서는 Down-sampling을 통해 이미지로부터 고차원의 특징들을 추출합니다. Down-sampling한 이미지로부터 1x1 Convolution을 통해 Segmentation이 이뤄진 Heat map을 생성한 뒤 Up-sampling 과정으로 원본 이미지와 동일한 크기로 복원합니다. 여기서 중요한 점은 이전 Classification에서 사용된 Fully Connected Layer가 1x1 Convolution Layer로 대체되었다는 점입니다. Fully Connected layer와 1x1 convolution layer 모두 행렬의 내적연산이기에 수학적으로 계산이 동일하다는 점에서 대체할 수 있습니다. 따라서 1x1 Convolution을 통해 이미지의 크기에 상관없이 모델이 동작할 수 있습니다. Loss function은 모든 픽셀에서의 Cross Entropy를 구해 더한 값으로 계산됩니다.
 
-![](<../.gitbook/assets/그림 11 FCN 구조.png>)
-
-그림 11. FCN 모델구조
+<figure><img src="../.gitbook/assets/그림 11 FCN 구조.png" alt=""><figcaption><p>그림 11. FCN 모델 구조</p></figcaption></figure>
 
 하지만 Down-sampling과 Up-sampling만으로는 정확한 Segmentation이 진행되지 않습니다. Down-sampling하여 생성된 Feature map은 이미지의 위치정보를 대략적으로만 가지고 있으며 이를 Up-sampling할 경우 기존 이미지보다 해상도가 낮아지게 됩니다. 그렇다고 Down-sampling 과정을 생략할 경우 이미지의 모든 픽셀에 대해 Classification을 해야 하므로 연산량이 극도로 증가합니다.
 
@@ -153,9 +137,7 @@ FCN은 Fully Convolutional Networks의 약자로 아래와 같이 모든 Layer�
 
 이러한 문제를 해결하기 위해 Skip architecture라는 기법을 추가하였습니다. ResNet의 구조와 같이 원본에 가까운 이미지를 Up-sampling과정에 포함해 최대한 위치 정보의 손실을 막자는 것이 아이디어의 핵심입니다. 아래 그림과 같이 Up-sampling의 Feature map에 Down-sampling의 Feature map을 합연산을 하여 Up-sampling을진행하는 구조입니다. 이로써 Segmentation의 결과가 더욱 정교해지는 것을 확인할 수 있었습니다.
 
-![](<../.gitbook/assets/그림 12 FCN skip connection.png>)
-
-그림 12. FCN의 Skip connection 구조 및 결과  비교
+<figure><img src="../.gitbook/assets/그림 12 FCN skip connection.png" alt=""><figcaption><p>그림 12. FCN의 Skip connection 구조 및 결과 비교</p></figcaption></figure>
 
 ### **U-Net**
 
@@ -163,9 +145,7 @@ FCN은 Skip connection을 통해 Up-sampling의 Feature map과 이전 Feature ma
 
 U-Net은 아래 그림과 같이 FCN의 구조를 바탕으로 Skip connection을 Feature map과 합연산이 아닌 Channel을 연결 지어 연장하는 방식으로 변경한 모델입니다. 모델의 구조가 U자형으로 생겼기에 U-Net이라는 이름을 가지며 Biomedical image에서 꽤 높은 성능을 보입니다. 평가지표를 실제 구분과 예측 구분의 비율로 하였을 때 PhC-U373 데이터 셋에서 92%라는 높은 성능을 보였습니다.
 
-![](<../.gitbook/assets/그림 13 U-Net 모델구조.png>)
-
-그림 13. U-Net 모델 구조
+<figure><img src="../.gitbook/assets/그림 13 U-Net 모델구조.png" alt=""><figcaption><p>그림 13. U-Net 모델 구조</p></figcaption></figure>
 
 
 
