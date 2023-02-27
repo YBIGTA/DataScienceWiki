@@ -6,15 +6,11 @@ Computer Vision은 visual data에 대한 연구가 이뤄지는 분야입니다.
 
 Object Detection은 아래 그림과 같이 이미지에서 물체의 위치와 해당 물체가 무엇인지 탐지하는 작업입니다. 따라서 물체를 분류하는 Classification 문제와 물체 위치를 찾는 Localization 두 가지 문제를 해결한다고 할 수 있습니다. 이 두 문제를 순차적으로 해결하는 인공지능 모델을 2-stage detector라고 하며 동시에 해결하는 모델을 1-stage detector라고 합니다. 먼저 2-stage Detector인 R-CNN을 소개한 후 1-stage detector인 YOLO모델을 소개하고자 합니다.
 
-![](<../.gitbook/assets/1번 Object Detection 예시사진.png>)
-
-그림 1. Object Detection 예시
+<figure><img src="../.gitbook/assets/그림 1 Object Detection 예시.png" alt=""><figcaption><p>그림 1. Object Detection 예시</p></figcaption></figure>
 
 Image Segmentation은 아래 그림과 같이 이미지를 영역으로 구분 지어 물체를 탐지하는 작업입니다. Segmentation은 색깔, 명도, 채도와 같은 이미지의 속성을 이용하는 Region-based segmentation, 물체 경계를 이용하는 Edge-based segmentation, 그리고 각 픽셀에 대해 labeling을 하는 Semantic segmentation 등으로 다양하게 풀이할 수 있습니다. 여기서는 Semantic segmentation의 방식을 활용한 FCN, U-Net 모델을 소개하고자 합니다.
 
-![](<../.gitbook/assets/2번 Segmentation 예시.png>)
-
-그림 2. Object Segmentation 예시
+<figure><img src="../.gitbook/assets/그림 2 Segmentation 예시.png" alt=""><figcaption><p>그림 2. Object Segmentation 예시</p></figcaption></figure>
 
 ****
 
@@ -24,9 +20,7 @@ Image Segmentation은 아래 그림과 같이 이미지를 영역으로 구분 �
 
 R-CNN은 Region-based Convolutional Neural Network의 약자로 Object Detection을 수행하는 2-Stage detector 모델입니다. 모델의 동작은 크게 Object가 존재하는 영역을 찾는 Region Proposal, 찾은 영역의 특징들을 추출하는 Feature Extraction, 특징들로부터 물체를 분류하는 Classification과 물체의 위치를 찾는 Bounding box regression으로 이루어져 있습니다. 정리하면 아래 그림과 같이 모델이 동작한다고 할 수 있습니다.
 
-![](<../.gitbook/assets/그림 3 R-CNN 모델.png>)
-
-그림 3. R-CNN 모델 구조(1)
+<figure><img src="../.gitbook/assets/그림 3 R-CNN 모델.png" alt=""><figcaption><p>그림 3. R-CNN 모델 구조(1)</p></figcaption></figure>
 
 #### **Region Proposal**
 

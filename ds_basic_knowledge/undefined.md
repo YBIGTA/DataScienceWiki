@@ -24,7 +24,9 @@
 
 PMF는 probability mass function의 약자로 discrete random varable의 확률분포를 의미합니다. 즉, discrete random variable의 치역을 하나의 probability 값으로 mapping해주는 함수라고 할 수 있습니다.&#x20;
 
-$$p_X(x)=P(X=x)$$
+$$
+p_X(x)=P(X=x)
+$$
 
 정리하면 Probability measure는 sample space의 부분집합인 event에서 실숫값으로 mapping하는 함수 중 3가지 공리를 따르는 함수이며 Random variable은 sample space에서 어떤 실숫값으로 mapping하는 함수이고 PMF는 random variable로 mapping된 값들을 확률값으로 mapping하는 함수입니다.
 
@@ -34,7 +36,9 @@ $$p_X(x)=P(X=x)$$
 
 PDF는 probability density function의 약자로 Continous random variable와 함께 아래 식과 같이 $$f_X(x)$$로 정의됩니다. Continous random variable의 치역 중 특정 구간에서의 확률값을 PDF의 적분을 통해 구할 수 있습니다.
 
-$$Prob[a < X \leq b]=\int_{a}^{b}f_X(x)dx$$
+$$
+Prob[a < X \leq b]=\int_{a}^{b}f_X(x)dx
+$$
 
 ****
 
@@ -42,7 +46,9 @@ $$Prob[a < X \leq b]=\int_{a}^{b}f_X(x)dx$$
 
 확률은 기본적으로 random experiment를 통해 계산할 수 있습니다. 예를 들어 동전 던지기를 한다고 하면 앞면이 1/2, 뒷면이 1/2이 나올 확률은 동전 던지기를 수만 번, 또는 그 이상 실행하면서 확률이 1/2로 수렴함을 알 수 있습니다. 하지만 열이 날 때 코로나에 걸렸을 확률, 도둑이 들었을 때 개가 짖을 확률과 같이 우리는 random experiment를 통해 알기 어려운 확률들이 있습니다. 이러한 상황에서 Bayes' theorem은 가설(H)과 증거(E)들의 관계를 통해 구하고자 하는 확률값을 추론할 수 있도록 합니다. 인공지능 또한 데이터라는 증거를 토대로 자신의 모델을 계속해서 업데이트하는 것이기에 베이즈 정리에 대한 이해는 중요하다고 할 수 있습니다.
 
-$$P(H|E)={P(E|H)P(H)\over P(E)}$$
+$$
+P(H|E)={P(E|H)P(H)\over P(E)}
+$$
 
 Bayes' Theorem은 위와 같은 식으로 정의됩니다.
 
@@ -69,15 +75,21 @@ Likelihood란 데이터가 주어졌을 때 현재 모델이 데이터를 얼마
 
 게임을 하나 해보겠습니다. 여러분은 제가 제시한 숫자가 어떤 규칙을 따르는지 맞히시면 됩니다. 저는 규칙에 해당하는 일부 숫자들만 제시할 것이며, 숫자는 0에서 100사이로 제한됩니다. 제가 제시할 숫자는 {4,8,32,64} 입니다. 혹시 생각나는 규칙이 있으신가요? 그렇다면 숫자 2는 규칙에 따를까요? 아니면 99는 과연 규칙에 포함되는 숫자일까요? 우리는 이에 대한 명확한 해답을 놓을 수 없습니다. 규칙이 2의 배수 일수도, 4의 배수 일수도, 아니면 2의 제곱수일 수도 있습니다. 하지만 데이터가 주어졌으니 우리는 가설을 세우고 이 가설이 과연 타당한지 Bayes 정리를 통해 생각해 볼 수 있습니다. 먼저 첫 번째 가설은 2의 배수라는 가설 $$h$$입니다. 그렇다면 제시할 수 있는 숫자는 총 50개이며 $$1\over 50$$ 확률로 숫자가 제시되므로 4개의 제시된 숫자들의 Likelihood는 $$P(D|h)=({1\over 50})^4$$가 됩니다. Likelihood가 굉장히 낮은 값을 가지니 아무래도 가설(모델)이 잘못된 것 같다는 생각이 듭니다. 그렇다면 모델을 4의 배수로 바꾼다면 Likelihood는 $$P(D|h)=({1\over 25})^4$$가 됩니다. 모델을 2의 제곱수로 바꾼다면 $$({1\over 6})^4$$가 될 것입니다. 가설을 바꿔가며 Likelihood가 계속하여 증가하는 것을 확인할 수 있습니다. 만약에 우리가 가설을 {4,8,32,64}로 가정한다면 Lieklihood는 $$({1\over 4})^4$$가 될 것입니다. 하지만 이 가설은 타당하다고 할 수 없을 것 같습니다. 물론 정답일 수도 있지만 저는 규칙에 해당하는 숫자들의 일부만 제시한다고 하였기 때문입니다. 이제 Likelihood를 계속해서 증가시키는 것만으로는 오류에 빠질 수 있음을 알게 되었습니다. 따라서 가설에 대한 prior probability $$P(h)$$를 도입하겠습니다. $$P(h)$$는 가설이 발생할 확률로 수많은 가설에 대해 얼마나 합리적인지에 대해 대략적인 지표를 제공할 수 있습니다. {4,8,32,64}라는 가설에 대해서는 $$P(h)$$가 낮을 것이며 2의 배수 4의 배수, 2의 제곱 수 등에 대해서는 모두 동일한 $$P(h)$$를 가진다고 하겠습니다. 만약 가설이 무한하게 많다면 하나하나 구분할 수 없으므로 모든 가설에 대해 $$P(h)$$가 동일하다고 가정할 수도 있겠습니다. 그렇다면 우리는 Bayes 정리에 따라 $$P(h|D)$$를 아래 식과 같이 계산할 수 있습니다. $$\Sigma_{h' \in H}p(D,h')$$값은 상수이므로 아무래도 $$P(D|h)P(h)$$값이 가장 높은 2의 제곱수가 정답 규칙에 제일 가까울 것 같습니다.&#x20;
 
-$$P(h|D)={P(D|h)P(h) \over \Sigma_{h' \in H}p(D,h')}$$
+$$
+P(h|D)={P(D|h)P(h) \over \Sigma_{h' \in H}p(D,h')}
+$$
 
 Likelihood는 모델에 따라 다르게 정의되며 데이터에 따라 값이 달라질 수 있습니다. 편리하게는 아래 식과 같이 Likelihood를 정의할 수 있습니다.
 
-$$L(\theta)=\prod\limits_{i \in X} (estimated\;probability\;of\;i)^{number\;of\;occurences\;of\;i}=\prod\limits_{i}q_\theta (X=i)^{Np(X=i)}$$
+$$
+L(\theta)=\prod\limits_{i \in X} (estimated\;probability\;of\;i)^{number\;of\;occurences\;of\;i}=\prod\limits_{i}q_\theta (X=i)^{Np(X=i)}
+$$
 
 만약 주어진 모델이 가우시안 분포였다면 평균과 표준편차가 $$\theta$$가 되고 Likelihood가 정의되겠습니다. 위의 예시를 이해하셨다면 결국 인공지능 모델은 주어진 데이터를 가장 잘 설명할 수 있는 가설을 찾는 것이라고 이해할 수 있겠습니다. 특히 새로운 데이터를 생성하는 생성모델의 경우 Likelihood를 최대화하는 방향으로 모델이 학습됩니다. Likelihood를 최대화하는 것을 Maximum likelihood estimation라고 하며 MLE라고 합니다. Likelihood는 수학적으로 Cross Entropy에 음의 부호를 붙인 것과 동일하므로 MLE는 Loss function중 하나인 Cross entropy를 Minimizing하는 것과 동일합니다.
 
-$$Cross\;Entropy\;\;H(p,q)=-{1\over N}log(L(\theta))=-\sum\limits_{i}p(X=i)log(q_\theta (X=i))$$
+$$
+Cross\;Entropy\;\;H(p,q)=-{1\over N}log(L(\theta))=-\sum\limits_{i}p(X=i)log(q_\theta (X=i))
+$$
 
 
 

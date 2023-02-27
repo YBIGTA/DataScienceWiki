@@ -16,3 +16,4 @@
   * [02. Attention and Transformer](cv\_nlp/nlp/02.-attention-and-transformer.md)
   * [03. ELMo, BERT](cv\_nlp/nlp/03.-elmo-bert.md)
   * [04. GPT](cv\_nlp/nlp/04.-gpt.md)
+  * [05. GPT-3.5 (InstructGPT), ChatGPT](cv\_nlp/nlp/05.-gpt-3.5-instructgpt-chatgpt.md)
