@@ -15,3 +15,4 @@
   * [01. Recurrent Models](cv\_nlp/nlp/01.-recurrent-models.md)
   * [02. Attention and Transformer](cv\_nlp/nlp/02.-attention-and-transformer.md)
   * [03. ELMo, BERT](cv\_nlp/nlp/03.-elmo-bert.md)
+  * [04. GPT](cv\_nlp/nlp/04.-gpt.md)
