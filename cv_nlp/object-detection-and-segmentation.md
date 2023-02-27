@@ -1,6 +1,6 @@
 # Object Detection & Segmentation
 
-## **서론**
+**서론**
 
 Computer Vision은 visual data에 대한 연구가 이뤄지는 분야입니다. 이미지 처리, 로보틱스, 의료, 인지과학, 신경학 등 시각 데이터를 처리하는 다양한 분야에서 연구되고 있습니다. 이번에는 Computer vision에서 다루는 Object detection과 Segmentation에 대해 알아보고자 합니다.
 
@@ -11,8 +11,6 @@ Object Detection은 아래 그림과 같이 이미지에서 물체의 위치와 
 Image Segmentation은 아래 그림과 같이 이미지를 영역으로 구분 지어 물체를 탐지하는 작업입니다. Segmentation은 색깔, 명도, 채도와 같은 이미지의 속성을 이용하는 Region-based segmentation, 물체 경계를 이용하는 Edge-based segmentation, 그리고 각 픽셀에 대해 labeling을 하는 Semantic segmentation 등으로 다양하게 풀이할 수 있습니다. 여기서는 Semantic segmentation의 방식을 활용한 FCN, U-Net 모델을 소개하고자 합니다.
 
 <figure><img src="../.gitbook/assets/그림 2 Segmentation 예시.png" alt=""><figcaption><p>그림 2. Object Segmentation 예시</p></figcaption></figure>
-
-****
 
 ## Object Detection
 
