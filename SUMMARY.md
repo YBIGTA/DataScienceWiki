@@ -3,6 +3,9 @@
 ## 서론 <a href="#ds_intro" id="ds_intro"></a>
 
 * [Data Science의 역사](README.md)
+* [자주 쓰는 Framework 소개](ds\_intro/framework.md)
+* [Data Science의 전망 및 진로](ds\_intro/data-science.md)
+* [분야별 Benchmark Dataset과 Pretrained Models](ds\_intro/benchmark-dataset-pretrained-models.md)
 
 ## 기초지식 <a href="#ds_basic_knowledge" id="ds_basic_knowledge"></a>
 
